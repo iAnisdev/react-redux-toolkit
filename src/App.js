@@ -1,13 +1,10 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import LoaderBackdrop from './features/loader/loader';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p className='text-3xl font-bold underline'>React App</p>
-        <Button variant='contained'>Hello</Button>
-      </header>
+        <LoaderBackdrop />
     </div>
   );
 }
