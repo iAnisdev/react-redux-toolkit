@@ -14,12 +14,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import { TodoActions } from '../todos/todosSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+
+const hoverPointer = { cursor: 'pointer' };
 
 export default function TodoCard(props) {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (e) => {
+        e.stopPropagation()
         setOpen(true);
     };
 
@@ -31,12 +37,15 @@ export default function TodoCard(props) {
         dispatch(TodoActions.removeTodo(props.id))
     }
 
+    const viewTodo = () => {
+        navigate(`/todo/${props.id}`)
+    }
     return (
         <>
-            <Card sx={{ width: '100%', marginTop: 1 }}>
+            <Card sx={{ width: '100%', marginTop: 1 }} style={hoverPointer}  onClick={viewTodo}>
                 <CardHeader
                     action={
-                        <IconButton aria-label="delete" onClick={handleClickOpen}>
+                        <IconButton aria-label="delete" onClick={(e) => handleClickOpen(e)}>
                             <Delete sx={{ color: red[500] }} />
                         </IconButton>
                     }
